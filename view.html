@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Resultat</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    /* L'image occupe tout l'ecran, sur fond noir, sans etre rognee. */
+    #photo {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+  <img id="photo" alt="">
+  <script>
+    // Liste blanche des images autorisees (securite : on n'affiche que ca).
+    var AUTORISEES = {
+      "cuisseur.jpeg": 1,
+      "desodorisant.jpeg": 1,
+      "fer_a_repasser.jpeg": 1,
+      "ananas.jpg": 1,
+      "biscuit.jpg": 1,
+      "fraise.jpg": 1,
+      "perdu.jpg": 1
+    };
+    var params = new URLSearchParams(location.search);
+    var img = params.get("img") || "perdu.jpg";
+    if (!AUTORISEES[img]) {
+      img = "perdu.jpg";
+    }
+    // Chemin relatif -> meme dossier que view.html (sur le CDN).
+    document.getElementById("photo").src = img;
+  </script>
+</body>
+</html>
